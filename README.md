@@ -3,7 +3,7 @@
 > Summaries of various system design topics, including pros and cons. **Everything is a trade-off.**
 >
 > Each section contains links to more in-depth resources.
-# Concepts
+# Fundamentals
 * [Scalability](#scalability)
   * [Load Balancing](#load-balancing)
   * [Auto Scaling](#auto-scaling)
@@ -110,6 +110,140 @@
 * [Monolith vs Microservices](#monolith-vs-microservices)
 * [Caching Trade-offs](#caching-trade-offs)
 * [Batch vs Real-time Processing](#batch-vs-real-time-processing)
+
+# Important Data Structures
+* [Hash Tables and Hash Functions](#hash-tables-and-hash-functions)
+* [Trees: B-Trees and LSM Trees](#trees-b-trees-and-lsm-trees)
+* [Tries (Prefix Trees)](#tries-prefix-trees)
+* [Bloom Filters](#bloom-filters)
+* [Skip Lists](#skip-lists)
+* [Consistent Hashing](#consistent-hashing)
+* [Quadtrees and Geospatial Indexes](#quadtrees-and-geospatial-indexes)
+* [Inverted Indexes](#inverted-indexes)
+* [HyperLogLog](#hyperloglog)
+* [Count-Min Sketch](#count-min-sketch)
+* [Merkle Trees](#merkle-trees)
+
+# Caching
+* [Why Caching Matters](#why-caching-matters)
+* [The Caching Hierarchy](#the-caching-hierarchy)
+  * [Client-Side Caching (Browser)](#client-side-caching-browser)
+  * [CDN Caching](#cdn-caching)
+  * [Load Balancer / API Gateway Caching](#load-balancer--api-gateway-caching)
+  * [Application-Level Caching](#application-level-caching)
+  * [Database Caching](#database-caching)
+* [Cache Key Design](#cache-key-design)
+* [Caching Strategies for Reads](#caching-strategies-for-reads)
+  * [Cache-Aside (Lazy Loading)](#cache-aside-lazy-loading)
+  * [Read-Through](#read-through)
+  * [Refresh-Ahead](#refresh-ahead)
+* [Caching Strategies for Writes](#caching-strategies-for-writes)
+  * [Write-Through](#write-through)
+  * [Write-Behind (Write-Back)](#write-behind-write-back)
+  * [Write-Around](#write-around)
+  * [Cache Invalidation on Write](#cache-invalidation-on-write)
+* [Cache Eviction Policies](#cache-eviction-policies)
+  * [LRU (Least Recently Used)](#lru-least-recently-used)
+  * [LFU (Least Frequently Used)](#lfu-least-frequently-used)
+  * [FIFO (First In, First Out)](#fifo-first-in-first-out)
+  * [TTL (Time To Live)](#ttl-time-to-live)
+  * [Random Replacement](#random-replacement)
+  * [Advanced Policies](#advanced-policies)
+* [Distributed Caching](#distributed-caching)
+  * [Distributed Cache Architecture](#distributed-cache-architecture)
+  * [Data Partitioning](#data-partitioning)
+  * [Replication](#replication)
+  * [Two-Tier Caching](#two-tier-caching)
+  * [Hot Keys](#hot-keys)
+* [Cache Consistency and Invalidation](#cache-consistency-and-invalidation)
+  * [Invalidation Strategies](#invalidation-strategies)
+    * [TTL-Based Expiration](#ttl-based-expiration)
+    * [Event-Based Invalidation](#event-based-invalidation)
+    * [Write-Through](#write-through-invalidation)
+    * [Publish-Subscribe Invalidation](#publish-subscribe-invalidation)
+  * [Dealing with Race Conditions](#dealing-with-race-conditions)
+    * [Delayed Double Deletion](#delayed-double-deletion)
+    * [Cache Versioning](#cache-versioning)
+    * [Distributed Locks](#distributed-locks)
+  * [Cache Stampede Prevention](#cache-stampede-prevention)
+    * [Locking (Single Flight)](#locking-single-flight)
+    * [Probabilistic Early Expiration](#probabilistic-early-expiration)
+    * [Stale-While-Revalidate](#stale-while-revalidate)
+  * [Cache Penetration and Avalanche](#cache-penetration-and-avalanche)
+    * [Negative Caching](#negative-caching)
+    * [Bloom Filter](#bloom-filter)
+  * [Consistency Levels](#consistency-levels)
+    * [Strong](#strong)
+    * [Eventual](#eventual)
+    * [Weak](#weak)
+  * [Cache Failures and Resilience](#cache-failures-and-resilience)
+    * [Failure Modes](#failure-modes)
+    * [Handling Cache Unavailability](#handling-cache-unavailability)
+    * [Preventing Cascading Failures](#preventing-cascading-failures)
+    * [Cache Warming](#cache-warming)
+    * [Cache Observability](#cache-observability)
+* [Caching Patterns in Practice](#caching-patterns-in-practice)
+  * [User Session Caching](#user-session-caching)
+  * [Feed / Timeline Caching](#feed--timeline-caching)
+  * [Leaderboard Caching](#leaderboard-caching)
+  * [Rate Limiting with Cache](#rate-limiting-with-cache)
+  * [URL Shortener Cache](#url-shortener-cache)
+  * [E-commerce Product Cache](#e-commerce-product-cache)
+
+
+      
+
+
+# API Design
+* [REST Fundamentals](#rest-fundamentals)
+* [GraphQL](#graphql)
+* [RPC / gRPC](#rpc--grpc)
+* [Resource Naming](#resource-naming)
+* [Request / Response Patterns](#request--response-patterns)
+* [Pagination and Filtering](#pagination-and-filtering)
+* [Rate Limiting](#rate-limiting)
+* [Versioning](#versioning)
+* [Authentication](#authentication)
+* [Error Handling](#error-handling)
+* [REST Best Practices](#rest-best-practices)
+* [Idempotency](#idempotency)
+* [Idempotency Key](#idempotency-key)
+
+# Database Design
+* [SQL vs NoSQL](#sql-vs-nosql)
+* [Schema Design Principles](#schema-design-principles)
+* [Normalization and Denormalization](#normalization-and-denormalization)
+* [Indexing Strategies](#indexing-strategies)
+* [Partitioning and Sharding](#partitioning-and-sharding)
+* [Replication Patterns](#replication-patterns)
+* [Consistency Models in Distributed System](#consistency-models-in-distributed-system)
+* [Transactions and ACID](#transactions-and-acid)
+* [Query Optimization](#query-optimization)
+
+# Distributed System Overview
+* [Time and Clock](#time-and-clock)
+* [Failure Detection and Handling](#failure-detection-and-handling)
+* [Consensus and Coordination](#consensus-and-coordination)
+* [FLP Impossibility](#flp-impossibility)
+* [Paxos](#paxos)
+* [Raft](#raft)
+* [Consistency Models](#consistency-models)
+  * [Eventual Consistency](#eventual-consistency)
+  * [Causal Consistency](#causal-consistency)
+  * [Sequential Consistency](#sequential-consistency)
+  * [Linearizability (Strong Consistency)](#linearizability-strong-consistency)
+* [Distributed System Patterns](#distributed-system-patterns)
+  * [Leader Election](#leader-election)
+  * [Distributed Locking](#distributed-locking)
+  * [Saga Pattern](#saga-pattern)
+  * [Event Sourcing](#event-sourcing)
+  * [CQRS](#cqrs)
+  * [Circuit Breaker](#circuit-breaker)
+* [Observability and Debugging](#observability-and-debugging)
+  * [Distributed Tracing](#distributed-tracing)
+  * [Key Metrics](#key-metrics)
+  * [Structured Logging](#structured-logging)
+
 # Distributed System
 <!-- Table of Contents Section -->
 * [Introduction to Distributed System](#distributed-system)
@@ -487,7 +621,7 @@ Implements compression algorithms using above frames (H.264 / VP9 / AV1)
 Components are located on different networked computer which communicate & co-ordinate thier action by passing messages to one another.
 
 **Why It Matters in Interviews ?**
-* Sets vocabulary — interviewers expect you to frame solutions in terms of nodes, messages, coordination 
+* Sets vocabulary — interviewers expect you to frame solutions in terms of nodes, messages, coordination
 
 
 ## Why Distributed System ?
@@ -496,7 +630,7 @@ Components are located on different networked computer which communicate & co-or
 3. Avaiability - redudancy (using multiple nodes)
 
 **Why It Matters in Interviews ?**
-* Directly answers "why not just use one big server?" — foundational justification for every design decision 
+* Directly answers "why not just use one big server?" — foundational justification for every design decision
 
 ## Fallacies of Distributed System
 1. N/w is reliable - even TCP gurantees, N/w and its hardware can fail.
