@@ -245,78 +245,77 @@
   * [Structured Logging](#structured-logging)
 
 # Distributed System
-<!-- Table of Contents Section -->
-* [Introduction to Distributed System](#distributed-system)
-  * [Why Distributed System ?](#why-distributed-system)
-  * [Fallacies of Distributed System](#fallacies-of-distributed-system)
-  * [Why Distributed System are hard ?](#why-distributed-system-are-hard)
-  * [Correctness in Distributed System](#correctness-in-distributed-system)
-  * [System Models](#system-models)
-    * [Timing Model](#timing-model)
-    * [Fault Model](#fault-model)
-    * [Network Model](#network-model)
-  * [Tale of exactly one semantics](#tale-of-exactly-one-semantics)
-  * [Failure in the world of distributed system](#failure-in-the-world-of-distributed-system)
-  * [Stateful & stateless system ?](#stateful--stateless-system)
-* [Basic Concepts & Theorems](#basic-concepts--theorems)
-  * [Partitioning](#partitioning)
-    * [Vertical partitioning](#vertical-partitioning)
-    * [Horizontal partitioning](#horizontal-partitioning)
-      * [Range based partitioning](#range-based-partitioning)
-      * [Hash based partitioning](#hash-based-partitioning)
-      * [Consistent hashing](#consistent-hashing)
-        * [Virtual nodes](#virtual-nodes)
-  * [Replication](#replication)
-    * [Single master replication](#single-master-replication)
-    * [Multi master replication](#multi-master-replication)
-    * [Quorums in distributed system](#quorums-in-distributed-system)
-  * [Safety Guarantees](#safety-guarantees)
-  * [Consistency Models](#consistency-models)
-    * [ACID Transactions](#acid-transactions)
-    * [CAP Theorem](#cap-theorem)
-    * [PACELC Theorem](#pacelc-theorem)
-  * [Isolation Level & Anomalies](#isolation-level--anomalies)
-    * [Isolation Levels](#isolation-levels)
-      * [Serializability](#serializability)
-      * [Repeatable Read](#repeatable-read)
-      * [Snapshot Isolation](#snapshot-isolation)
-      * [Read Committed](#read-committed)
-      * [Read Uncommitted](#read-uncommitted)
-    * [Anomalies](#anomalies)
-      * [Dirty Write](#dirty-write)
-      * [Dirty Read](#dirty-read)
-      * [Fuzzy or non-repeatable read](#fuzzy-or-non-repeatable-read)
-      * [Phantom reads](#phantom-reads)
-      * [Read Skew](#read-skew)
-      * [Write Skew](#write-skew)
-* [Distributed Transactions](#distributed-system)
-  * [Types of Distributed Transactions](#why-distributed-system)
-  * [Achieving Isolation](#fallacies-of-distributed-system)
-    * [PCC / 2PL ](#why-distributed-system-are-hard)
-    * [OCC / MVCC ](#correctness-in-distributed-system)
-  * [Achieving Atomicity](#system-models)
-    * [2PC](#timing-model)
-    * [3PC](#fault-model)
-    * [Quorum-based Commit](#network-model)
-  * [Achieving consistency in long lived transaction](#tale-of-exactly-one-semantics)
-    * [Sagas](#timing-model)
-* [Consensus](#consensus)
-  * [FLP Impossibility](#flp-impossibility)
-  * [Paxos](#paxos)
-  * [Replicated State Machine via Consensus](#replicated-state-machine-via-consensus)
-  * [Distributed Transaction via Consensus](#distributed-transaction-via-consensus)
-  * [Raft](#raft)
-* [Time & Clock](#time--clock)
-  * [Time](#time)
-  * [Logical Clocks](#logical-clocks)
-  * [Orders](#orders)
-  * [Total Order and Partial Order](#total-order-and-partial-order)
-  * [Concept of Causality](#concept-of-causality)
-  * [Lamport Clock](#lamport-clock)
-  * [Vector Clock](#vector-clock)
-  * [Version Vectors & Dotted Vectors](#version-vectors--dotted-vectors)
-  * [Distributed Snapshot](#distributed-snapshot)
-  * [Physical & Logical Time](#physical--logical-time)
+* [Introduction to Distributed System](./docs/distributed-system.md)
+  * [Why Distributed System ?](./docs/distributed-system.md#why-distributed-system-)
+  * [Fallacies of Distributed System](./docs/distributed-system.md#fallacies-of-distributed-system)
+  * [Why Distributed System are hard ?](./docs/distributed-system.md#why-distributed-system-are-hard-)
+  * [Correctness in Distributed System](./docs/distributed-system.md#correctness-in-distributed-system)
+  * [System Models](./docs/distributed-system.md#system-models)
+    * [Timing Model](./docs/distributed-system.md#timing-model)
+    * [Fault Model](./docs/distributed-system.md#fault-model)
+    * [Network Model](./docs/distributed-system.md#network-model)
+  * [Tale of exactly one semantics](./docs/distributed-system.md#tale-of-exactly-one-semantics)
+  * [Failure in the world of distributed system](./docs/distributed-system.md#failure-in-the-world-of-distributed-system)
+  * [Stateful & stateless system ?](./docs/distributed-system.md#stateful--stateless-system)
+* [Basic Concepts & Theorems](./docs/distributed-system.md#basic-concepts--theorems)
+  * [Partitioning](./docs/distributed-system.md#partitioning)
+    * [Vertical partitioning](./docs/distributed-system.md#vertical-partitioning)
+    * [Horizontal partitioning](./docs/distributed-system.md#horizontal-partitioning)
+      * [Range based partitioning](./docs/distributed-system.md#range-based-partitioning)
+      * [Hash based partitioning](./docs/distributed-system.md#hash-based-partitioning)
+      * [Consistent hashing](./docs/distributed-system.md#consistent-hashing)
+        * [Virtual nodes](./docs/distributed-system.md#virtual-nodes)
+  * [Replication](./docs/distributed-system.md#replication)
+    * [Single master replication](./docs/distributed-system.md#single-master-replication)
+    * [Multi master replication](./docs/distributed-system.md#multi-master-replication)
+    * [Quorums in distributed system](./docs/distributed-system.md#quorums-in-distributed-system)
+  * [Safety Guarantees](./docs/distributed-system.md#safety-guarantees)
+  * [Consistency Models](./docs/distributed-system.md#consistency-models)
+    * [ACID Transactions](./docs/distributed-system.md#acid-transactions)
+    * [CAP Theorem](./docs/distributed-system.md#cap-theorem)
+    * [PACELC Theorem](./docs/distributed-system.md#pacelc-theorem)
+  * [Isolation Level & Anomalies](./docs/distributed-system.md#isolation-level--anomalies)
+    * [Isolation Levels](./docs/distributed-system.md#isolation-levels)
+      * [Serializability](./docs/distributed-system.md#serializability)
+      * [Repeatable Read](./docs/distributed-system.md#repeatable-read)
+      * [Snapshot Isolation](./docs/distributed-system.md#snapshot-isolation)
+      * [Read Committed](./docs/distributed-system.md#read-committed)
+      * [Read Uncommitted](./docs/distributed-system.md#read-uncommitted)
+    * [Anomalies](./docs/distributed-system.md#anomalies)
+      * [Dirty Write](./docs/distributed-system.md#dirty-write)
+      * [Dirty Read](./docs/distributed-system.md#dirty-read)
+      * [Fuzzy or non-repeatable read](./docs/distributed-system.md#fuzzy-or-non-repeatable-read)
+      * [Phantom reads](./docs/distributed-system.md#phantom-reads)
+      * [Read Skew](./docs/distributed-system.md#read-skew)
+      * [Write Skew](./docs/distributed-system.md#write-skew)
+* [Distributed Transactions](./docs/distributed-system.md#distributed-transactions)
+  * [Types of Distributed Transactions](./docs/distributed-system.md#types-of-distributed-transactions)
+  * [Achieving Isolation](./docs/distributed-system.md#achieving-isolation)
+    * [PCC / 2PL](./docs/distributed-system.md#pcc--2pl)
+    * [OCC / MVCC](./docs/distributed-system.md#occ--mvcc)
+  * [Achieving Atomicity](./docs/distributed-system.md#achieving-atomicity)
+    * [2PC](./docs/distributed-system.md#2pc)
+    * [3PC](./docs/distributed-system.md#3pc)
+    * [Quorum-based Commit](./docs/distributed-system.md#quorum-based-commit)
+  * [Achieving consistency in long lived transaction](./docs/distributed-system.md#achieving-consistency-in-long-lived-transaction)
+    * [Sagas](./docs/distributed-system.md#sagas)
+* [Consensus](./docs/distributed-system.md#consensus)
+  * [FLP Impossibility](./docs/distributed-system.md#flp-impossibility)
+  * [Paxos](./docs/distributed-system.md#paxos)
+  * [Replicated State Machine via Consensus](./docs/distributed-system.md#replicated-state-machine-via-consensus)
+  * [Distributed Transaction via Consensus](./docs/distributed-system.md#distributed-transaction-via-consensus)
+  * [Raft](./docs/distributed-system.md#raft)
+* [Time & Clock](./docs/distributed-system.md#time--clock)
+  * [Time](./docs/distributed-system.md#time)
+  * [Logical Clocks](./docs/distributed-system.md#logical-clocks)
+  * [Orders](./docs/distributed-system.md#orders)
+  * [Total Order and Partial Order](./docs/distributed-system.md#total-order-and-partial-order)
+  * [Concept of Causality](./docs/distributed-system.md#concept-of-causality)
+  * [Lamport Clock](./docs/distributed-system.md#lamport-clock)
+  * [Vector Clock](./docs/distributed-system.md#vector-clock)
+  * [Version Vectors & Dotted Vectors](./docs/distributed-system.md#version-vectors--dotted-vectors)
+  * [Distributed Snapshot](./docs/distributed-system.md#distributed-snapshot)
+  * [Physical & Logical Time](./docs/distributed-system.md#physical--logical-time)
 
 # Interview Patterns
 
@@ -509,228 +508,3 @@
     * [Calculating Acceptable Risk](#calculating-acceptable-risk)
 
 ---
-
-## Media Streaming
-
-## Why Is Streaming Challenging?
-Demanding workload:
-1. Video is Massive – raw video, enormous egress
-2. Timing is critical – frame shouldn't arrive late
-3. Networks are unreliable – should adapt n/w condition
-4. Scale multiplies everything – all problems will be multiplied
-
-## Video Encoding Fundamentals
-
-### How Video Compression Works
-Removing redundancy:
-1. Spatial redundancy – within frame (sky, wall)
-2. Temporal redundancy – between frames
-3. I-Frames (intra-frames) – like photo / no dependency / anchor seek points
-4. P-Frames (Predicted) – predict from previous P or I frame
-5. B-Frames (Bidirectional) – predict current from left and right
-
-### Codecs
-Implements compression algorithms using above frames (H.264 / VP9 / AV1)
-
-### Encoding Profiles
-1. Key frame – how often to insert I frame
-2. FPS – frame per second (30 fps + Keyframe interval = 2 seconds → every 60 frames, one I-frame)
-3. Bitrate – how much data is sent every second
-
-## Streaming Protocols
-1. **RTMP** (Real-Time Messaging Protocol) – TCP based / upload use cases
-2. **HLS** (HTTP Live Streaming) – chop into segments / maintain text manifest
-3. **DASH** (Dynamic Adaptive Streaming over HTTP) – same as HLS but XML manifest
-4. **WebRTC** – UDP based for real-time communication (video calls) / cannot scale much
-
-## Architecture of Streaming System
-
-### High-Level Architecture
-1. **Ingest Layer** – streamers inject
-2. **Transcoding Layer** – transcode to multi-format / package into segments and manifest
-3. **Storage Layer** – hot (live) / warm (VOD) / cold (archive)
-4. **Origin Server** – serves segments and manifest
-5. **CDN** (Content Delivery Network) – redundant / protect origin
-6. **Player Layer** – downloads segment and manifest, decides next quality segment to download
-
-## Live Streaming vs Video-on-Demand
-1. Live Streaming
-2. Video-on-Demand
-
-## Adaptive Bitrate Streaming (ABR)
-
-### How ABR Works
-
-### ABR Algorithms
-1. Throughput-based
-2. Buffer-based (BBA)
-3. Hybrid approaches
-
-### Quality Switches
-
-## Low-Latency Streaming
-
-### Sources of Latency
-
-### Techniques to Reduce Latency
-1. Shorter segments
-2. Chunked transfer (CMAF)
-3. Low-latency HLS (LL-HLS)
-4. Reduced client buffer
-5. WebRTC for interactive delivery
-
-### Latency vs Scale Trade-off
-
-## Scaling Strategies
-1. CDN Edge caching
-2. Multi-CDN
-3. Regional Origin Server
-4. Transcoding Distribution
-5. Predictive Scaling
-
-## Content Protection
-1. Tokenized URLs
-2. DRM (Digital Rights Management)
-
-## Measuring Quality of Experience
-
-## Real-World Architecture: Live Streaming Platform
-1. Requirement
-2. Architecture
-3. Component Details
-   1. Ingest Layer
-   2. Transcoding Pipeline
-   3. Manifest Generation
-   4. Low-Latency Mode
-4. Scaling Considerations
-   1. Ingest scaling
-   2. Transcoding scaling
-   3. Storage scaling
-   4. CDN scaling
-
-## Common Mistakes to Avoid
-1. Ignoring client diversity
-2. Underestimating transcoding costs
-3. Not testing network conditions
-4. Hardcoding URLs
-5. Ignoring the last mile
-
----
-
-## Distributed System
-Components are located on different networked computer which communicate & co-ordinate thier action by passing messages to one another.
-
-**Why It Matters in Interviews ?**
-* Sets vocabulary — interviewers expect you to frame solutions in terms of nodes, messages, coordination
-
-
-## Why Distributed System ?
-1. Performance - hardware limitations of a single computer (better performance at lower cost using) & using multiple commodity hardware.
-2. Scalability - we can split, store and distributed data and traffice among multiple nodes.
-3. Avaiability - redudancy (using multiple nodes)
-
-**Why It Matters in Interviews ?**
-* Directly answers "why not just use one big server?" — foundational justification for every design decision
-
-## Fallacies of Distributed System
-1. N/w is reliable - even TCP gurantees, N/w and its hardware can fail.
-2. N/w is homogenous - all machines are not same.
-3. Topology doesn't change - no fixed IP (nodes come and go)
-4. Latency is zero - n/w call not same as local database call.
-5. Bandwidth is infinite - concurrent request can congest bandwidth.
-6. N/w is secure
-7. Global Clock
-8. There is one admin controls everything
-
-**Why It Matters in Interviews ?**
-Shows maturity — you know the network is unreliable, latency exists, topology changes; prevents naive designs
-
-## Why Distributed System are hard ?
-* Hard to design, build and reason thus increasing the risk of error.
-* Main properties which makes distributed system hard?
-  1. Network asynchrony
-  2. Partial failures
-  3. Concurrency
-
-## Correctness in Distributed System
-* correctness - propeties must be satisfied by system.
-* safety properties - must never happen (money shouldn't be deducted twice)
-* liveness properties - should happen eventually.(Once n/w back; make payment success or fail clearly and refund)
-* Trade off between both or cannot be achieved both.
-
-**Why It Matters in Interviews ?**
-Comes up when justifying tradeoffs — "this system guarantees it won't double-charge (safety) but may delay confirmation (liveness)"
-
-## System Models
-* Formal set of assumpations about how the system's process, network and time behaves.
-* Distributed system are too diverse to reason about directly, so we define model with clear assumption.
-* Algorthim proven correct in a mode, work for all system that satisy those assumptions without reasoning from scartch.
-* There are 3 Dimension/Properties of a system.
-  1. How nodes communicate with each other (timing model)
-  2. How nodes fail(fault model)
-  3. How messages behave (network model)
-  4. Clock Assumptions. 
-
-**Why It Matters in Interviews ?**
-Lets you reason about algorithm choices — "I'm using quorum because we assume crash faults and unreliable links"
-
-### Timing Model
-| **Model** | **Description** |
-|---|---|
-| **Synchronous** | Known bounds on message delay and processing time |
-| **Asynchronous** | No timing bounds — you can't distinguish slow from dead |
-| **Partially synchronous** | Usually synchronous, but occasionally asynchronous (real world) |
-
-### Fault Model
-| **Model** | **Description** | **Node** |
-|---|---|---|
-| **Fail-stop** | Permantely gone & other nodes cna detects its gone| Crash + Detectable
-| **Crash Nodes(fail-silent)** | dead but others cannot detect its gone. | Crash + not detectable
-| **Ommision** | Works but unable to communicate | Drops message
-| **Byzantine** | Random problem | Arbitrary/malicious behavior.
-### Network Model
-| **Model** | **Description** |
-|---|---|
-| **Reliable links** | Messages are never lost, duplicated, or reordered |
-| **Fair-loss links** | Messages may be lost but will eventually get through if retried |
-| **Arbitrary links** | Messages can be lost, duplicated, reordered, or corrupted |
-
-## Tale of exactly one semantics
-* Issue with processing message or not processing at all.  
-E.g. deducting money twice or not deducting at all.
-* Solutions
-  1. Idempotent operation
-  2. De-duplication
-* Notion of delivery & Processing
-  1. Delivery - we don't control over because of n/w reliability and stability
-  2. Processing - we have control and we can do some solutioning.
-* Even the message delivered multiple times, we can ensure **the effect happens only one**
-
-**Why It Matters in Interviews ?**
-Very common interview topic — design a payment system, message queue, or order processor without duplicate processing. Practical solutions interviewers expect: idempotency & de-duplication (Stripe, AWS all use this)
-
-## Failure in the world of distributed system
-* Very difficult to identify failure due to async nature and very hard to find node dead or slow 
-* Main mechanism to detect 
-  1. Time out - otherwise node will be waiting eternally.
-      * Small number – early declare dead or even split brain 
-      * Large number – response will be slower due to waiting 
-  2. Failure detectors – component of a node which identifies other failed nodes 
-      * 2 category of detectors (trade off b/w completeness & accuracy) 
-      1. Based on completeness(short timeout) – ever gets stuck waiting on a dead node (may falsely accuse a slow node)
-      2. Based on accuracy (long timeout) – never wrongly accuses a live node (may wait too long on a dead one)
-
-| **Detector** | **Used In** | **Tuning** |
-|---|---|---|
-| **Heartbeat + timeout** | Kafka, ZooKeeper, etcd | `session.timeout.ms`, `tickTime` — lower = faster detection, more false positives |
-| **Phi Accrual detector** | Akka, Cassandra | `phi` threshold — higher phi = more accurate, slower to declare failure |
-
-**Why It Matters in Interviews ?**
-"How do you know a node is dead?" — timeout tradeoffs show you understand split-brain risk. Underpins leader election, health checks, load balancer design
-
-## Stateful & stateless system
-* Stateless - maintains no states/ all nodes are identical/ easy to scale
-* Stateful - more complex as different node store different data, need proper routing.
-
-**Why It Matters in Interviews ?**
-Core scaling question — "can I add more instances?" depends entirely on whether your service is stateful
