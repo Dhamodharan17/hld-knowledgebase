@@ -124,6 +124,17 @@
 * [Count-Min Sketch](./docs/data-structures.md#count-min-sketch)
 * [Merkle Trees](./docs/data-structures.md#merkle-trees)
 
+# Networking
+* The Network Stack: OSI vs TCP/IP
+* IP Addressing and Routing
+* TCP Deep Dive
+* UDP and When to Use It
+* DNS: The Internet's Directory
+* HTTP/HTTPS Protocol
+* TLS/SSL and Security
+* Network Performance and Latency
+* Networking in Distributed Systems
+
 # Caching
 * [Why Caching Matters](./docs/caching.md#why-caching-matters)
 * [The Caching Hierarchy](./docs/caching.md#the-caching-hierarchy)
@@ -379,6 +390,8 @@
   * [Chunked Uploads](./docs/interview-patterns.md#chunked-uploads)
   * [Direct Upload with Pre-Signed URLs](./docs/interview-patterns.md#direct-upload-with-pre-signed-urls)
   * [Multipart Upload Protocol](./docs/interview-patterns.md#multipart-upload-protocol)
+  * [Streaming Uploads](./docs/interview-patterns.md#streaming-uploads)
+  * [After the Upload: Completion and Processing](./docs/interview-patterns.md#after-the-upload-completion-and-processing)
   * [Download Optimizations](./docs/interview-patterns.md#download-optimizations)
   * [Range Request](./docs/interview-patterns.md#range-request)
   * [CDN Distribution](./docs/interview-patterns.md#cdn-distribution)
