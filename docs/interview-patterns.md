@@ -478,32 +478,44 @@ Safe concurrent uploads ??
 
 ## Handling Location Data
 ### Why is Location Data Challenging?
+- no total ordering for long, lat data
+### Representing Locations
+Latitude and Longitude
+Geohash
+H3 (Hexagonal Hierarchical Index)
+S2 (Google's Spherical Geometry Library)
 ### Spatial Indexing Techniques
     #### Quadtree
     #### R-tree
-    #### Geo-Hash
+    #### Geo-Hash + Btree   
 ### Database Options for Geo-Spatial Data
     #### PostgreSQL + PostGIS
     #### Redis Geo
     #### MongoDB (2dsphere Index)
     #### Elasticsearch
-### Common Query Patterns
+### Common Query Patterns - search pattern
     #### Nearby Search (K-Nearest Neighbors)
     #### Radius Search
     #### Bounding Box Query
     #### Polygon Search
-#### Distance Calculation
-### Scaling Strategies
-#### Geographic Sharding
-#### Geohash-Based Partitioning
-#### Hybrid Architecture
-#### Caching Hot Regions
-#### In-Memory Quadtree
+    #### Distance Calculation
+### Scaling Strategies - split(shard)/cache
+    #### Geographic Sharding
+    #### Geohash-Based Partitioning
+    #### Hybrid Architecture
+    #### Caching Hot Regions
+    #### In-Memory Quadtree
 ### Privacy and Data Sensitivity
     #### Collect only what you need
     #### Reduce precision where full precision is not needed
     #### Separate live data from history
     #### Apply access controls and retention policies
+### Common Mistakes to Avoid
+    #### Latitude/Longitude Order Confusion
+    #### Ignoring Earth's Curvature
+    #### Forgetting the Geohash Edge Problem
+    #### Over-Engineering for Small Scale
+    #### Ignoring Update Frequency
 
 ## Generate Unique IDs
 ### Why Is This Problem Hard?
