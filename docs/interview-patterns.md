@@ -376,40 +376,122 @@ Backend handles completion: The client notifies your backend server when all chu
 * This is why file records usually carry a status such as uploaded, processing, and ready. 
 
 ### Download Optimizations
+* A naive download suffers from the same problems as a naive upload: no resumability, slow transfer on single connections, and poor user experience when something goes wrong.
+* Fortunately, HTTP has built-in features that address these issues.
 ### Range Request
-### Parallel Downloads
-### CDN Distribution
-### Authorizing Downloads
+* HTTP range requests allow downloading specific byte ranges rather than the entire file
+```
+GET /files/video.mp4
+Range: bytes=0-1048575
 
+Response:
+HTTP/1.1 206 Partial Content
+Content-Range: bytes 0-1048575/104857600
+Content-Length: 1048576
+
+[First 1 MB of data]
+```
+* The 206 Partial Content status code indicates that the server is returning only part of the file
+* This enables three important capabilities: Resumable downloads/Parallel downloads/Video seeking
+
+**Parallel Downloads**
+* Parallel downloads work the same way as parallel uploads. Split the file into ranges and fetch them concurrently
+* The client reassembles the chunks into the complete file. This saturates available bandwidth better than a single connection, especially on high-latency links where TCP congestion control limits individual connection speed.
+
+### CDN Distribution
+* A Content Delivery Network solves this by caching files at edge servers distributed around the world
+
+For large files, CDNs offer several advantages:
+
+Lower latency. Users connect to nearby edge servers rather than distant origin servers.
+Higher throughput. Edge servers are optimized for high-bandwidth transfers.
+Reduced origin load. Popular files are served from cache, protecting your origin from traffic spikes.
+Geographic redundancy. If one edge goes down, traffic routes to another.
+
+To make your files CDN-friendly, set appropriate cache headers:
+```
+Cache-Control: public, max-age=31536000, immutable
+ETag: "abc123"
+Accept-Ranges: bytes
+```
+The Accept-Ranges: bytes header tells clients that range requests are supported.
+Use long max-age values only for immutable, versioned object names. 
+
+### Authorizing Downloads
+* The same direct-path idea from uploads applies in reverse: rather than streaming private bytes through your application, the API server authorizes the request and then hands back a short-lived signed URL (or signed cookie) that points at object storage or the CDN edge.
+* The client asks the API server for a file. The server checks that the caller is allowed to read it, then returns a pre-signed GET URL scoped to that one object with a short expiry, typically 15 to 60 minutes. The client downloads directly from storage or the CDN using that URL.
 
 ### Storage Architecture
+So far we have focused on how to transfer large files. But where should they live once they arrive? The answer depends on your access patterns, scale, and consistency requirements.
+
 #### Choosing the Right Storage
+| Storage Type | Best For | Avoid When |
+| :--- | :--- | :--- |
+| **Object Storage** (S3, GCS, Azure Blob) | Large immutable objects, static assets, backups | Low-latency random writes inside files |
+| **Distributed File System** (HDFS, GlusterFS) | Analytics workloads, shared access across nodes | Small files, web serving |
+| **Database** (BLOB columns) | Small files (<1 MB), tight consistency with related data | Large files (performance degrades badly) |
+* For most web applications, object storage is the right choice. It is designed for large objects, scales well, and integrates with CDNs and direct upload patterns
 #### Separating Metadata from Data
+* A common mistake is treating file storage as a single problem. **In practice, you have two distinct concerns.** The **metadata** is the file name, size, owner, timestamps, permissions, and the location of the actual data. The **data is the actual file bytes**.
+
+* Storing these together in a traditional database works for small files, but breaks down quickly as files grow. Instead, **store metadata in a database optimized for queries, and store file data in object storage optimized for large objects**
+* This separation provides several benefits:
+1. Independent scaling
+2. Efficient queries
+3. Clear consistency boundaries - Keep the metadata database as the source of truth.
+4. Different retention policies - You might keep metadata forever for auditing, but delete the actual files after a retention period
+
 #### Content-Addressable Storage
+* Instead of storing files at arbitrary paths, compute a hash of the file content and use that hash as the storage key:
+```
+File: vacation.mp4
+SHA-256: 3b4c5d6e7f8a9b0c...
+Storage path: /blobs/3b/4c/3b4c5d6e7f8a9b0c...
+```
+* The path is derived from the hash, typically using the first few characters as directory prefixes
+This approach has several useful properties:
+
+Whole-file deduplication
+If two users upload the same file, it has the same hash and can be stored once. The metadata records point to the same object. For systems where users often share common files like popular PDFs or media, this can save significant storage.
+Immutability
+The content cannot change without changing the hash. This makes integrity verification trivial: re-hash the content and compare. If they match, the file is intact.
+Safe concurrent uploads ??
 
 ### Compression and Deduplication
+#### Compression Trade-offs
+| Approach | Pros | Cons |
+| :--- | :--- | :--- |
+| **Client-side compression** | Reduces upload bandwidth | CPU cost on client, requires client support |
+| **Server-side compression** | Transparent to client | Server CPU cost, delayed storage |
+| **Storage-level compression** | Automatic, transparent | May not work for already-compressed formats |
 #### Block Level Deduplication
-#### Content-Defined Chunking
+* Block-level deduplication solves this by splitting files into blocks and deduplicating at the block level:
+* File B shares blocks 1 and 3 with File A. Only block 2 is different, so only one new block is stored.
+* Backup and sync systems use this idea to upload only changed blocks when a small part of a large file changes.
 
-## Media Streaming
-→ See [media-streaming.md](./media-streaming.md)
+#### Content-Defined Chunking
+* All three fixed-size chunks changed even though we only inserted one character. In real systems, this boundary-shift problem can greatly reduce deduplication.
+
+* Content-Defined Chunking (CDC) solves this by using the content itself to find chunk boundaries. Instead of cutting at fixed intervals, it looks for specific patterns in the data (typically using a rolling hash like Rabin fingerprinting). When the pattern appears, that becomes a chunk boundary.
+
+* With CDC, many original chunks are preserved because boundaries are based on content patterns rather than fixed offsets
 
 ## Handling Location Data
 ### Why is Location Data Challenging?
 ### Spatial Indexing Techniques
-#### Quadtree
-#### R-tree
-#### Geo-Hash
+    #### Quadtree
+    #### R-tree
+    #### Geo-Hash
 ### Database Options for Geo-Spatial Data
-#### PostgreSQL + PostGIS
-#### Redis Geo
-#### MongoDB (2dsphere Index)
-#### Elasticsearch
+    #### PostgreSQL + PostGIS
+    #### Redis Geo
+    #### MongoDB (2dsphere Index)
+    #### Elasticsearch
 ### Common Query Patterns
-#### Nearby Search (K-Nearest Neighbors)
-#### Radius Search
-#### Bounding Box Query
-#### Polygon Search
+    #### Nearby Search (K-Nearest Neighbors)
+    #### Radius Search
+    #### Bounding Box Query
+    #### Polygon Search
 #### Distance Calculation
 ### Scaling Strategies
 #### Geographic Sharding
@@ -418,10 +500,10 @@ Backend handles completion: The client notifies your backend server when all chu
 #### Caching Hot Regions
 #### In-Memory Quadtree
 ### Privacy and Data Sensitivity
-#### Collect only what you need
-#### Reduce precision where full precision is not needed
-#### Separate live data from history
-#### Apply access controls and retention policies
+    #### Collect only what you need
+    #### Reduce precision where full precision is not needed
+    #### Separate live data from history
+    #### Apply access controls and retention policies
 
 ## Generate Unique IDs
 ### Why Is This Problem Hard?
