@@ -125,15 +125,36 @@
 * [Merkle Trees](./docs/data-structures.md#merkle-trees)
 
 # Networking
-* The Network Stack: OSI vs TCP/IP
-* IP Addressing and Routing
-* TCP Deep Dive
-* UDP and When to Use It
-* DNS: The Internet's Directory
-* HTTP/HTTPS Protocol
-* TLS/SSL and Security
-* Network Performance and Latency
-* Networking in Distributed Systems
+* [The Network Stack: OSI vs TCP/IP](./docs/networking.md#the-network-stack-osi-vs-tcpip)
+  * [The OSI Model](./docs/networking.md#the-osi-model)
+  * [The TCP/IP Model](./docs/networking.md#the-tcpip-model)
+  * [Data Encapsulation](./docs/networking.md#data-encapsulation)
+* [IP Addressing and Routing](./docs/networking.md#ip-addressing-and-routing)
+  * [IPv4 vs IPv6](./docs/networking.md#ipv4-vs-ipv6)
+  * [Public vs Private IP Addresses](./docs/networking.md#public-vs-private-ip-addresses)
+  * [Subnetting and CIDR](./docs/networking.md#subnetting-and-cidr)
+  * [How Routing Works](./docs/networking.md#how-routing-works)
+* [TCP Deep Dive](./docs/networking.md#tcp-deep-dive)
+  * [TCP Connection Lifecycle](./docs/networking.md#tcp-connection-lifecycle)
+  * [TCP Header Structure](./docs/networking.md#tcp-header-structure)
+  * [Reliability Mechanisms](./docs/networking.md#reliability-mechanisms)
+    1. [Acknowledgments and Retransmission](./docs/networking.md#acknowledgments-and-retransmission)
+    2. [Sequence Numbers](./docs/networking.md#sequence-numbers)
+    3. [Checksums](./docs/networking.md#checksums)
+    4. [Sliding Window](./docs/networking.md#sliding-window)
+  * [Flow Control](./docs/networking.md#flow-control)
+  * [Congestion Control](./docs/networking.md#congestion-control)
+  * [TCP Tuning Parameters](./docs/networking.md#tcp-tuning-parameters)
+* [UDP and When to Use It](./docs/networking.md#udp-and-when-to-use-it)
+  * [UDP vs TCP](./docs/networking.md#udp-vs-tcp)
+  * [UDP Header](./docs/networking.md#udp-header)
+  * [When to Use UDP](./docs/networking.md#when-to-use-udp)
+  * [Building Reliability on UDP](./docs/networking.md#building-reliability-on-udp)
+* [DNS: The Internet's Directory](./docs/networking.md#dns-the-internets-directory)
+* [HTTP/HTTPS Protocol](./docs/networking.md#httphttps-protocol)
+* [TLS/SSL and Security](./docs/networking.md#tlsssl-and-security)
+* [Network Performance and Latency](./docs/networking.md#network-performance-and-latency)
+* [Networking in Distributed Systems](./docs/networking.md#networking-in-distributed-systems)
 
 # Caching
 * [Why Caching Matters](./docs/caching.md#why-caching-matters)
@@ -232,7 +253,14 @@
 * [Query Optimization](./docs/database-design.md#query-optimization)
 
 # Distributed System Overview
-* [Time and Clock](./docs/distributed-system-overview.md#time-and-clock)
+* Why Distributed Systems
+* Fundamental Properties and Trade-offs
+  * The CAP Theorem
+  * CP vs AP Systems
+  * PACELC: Beyond CAP
+  * Quorums and Replication
+  *  The Eight Fallacies of Distributed Computing
+* [Time, Clocks, and Ordering](./docs/distributed-system-overview.md#time-and-clock)
 * [Failure Detection and Handling](./docs/distributed-system-overview.md#failure-detection-and-handling)
 * [Consensus and Coordination](./docs/distributed-system-overview.md#consensus-and-coordination)
 * [FLP Impossibility](./docs/distributed-system-overview.md#flp-impossibility)
@@ -393,8 +421,8 @@
   * [Streaming Uploads](./docs/interview-patterns.md#streaming-uploads)
   * [After the Upload: Completion and Processing](./docs/interview-patterns.md#after-the-upload-completion-and-processing)
   * [Download Optimizations](./docs/interview-patterns.md#download-optimizations)
-  * [Range Request](./docs/interview-patterns.md#range-request)
-  * [CDN Distribution](./docs/interview-patterns.md#cdn-distribution)
+    * [Range Request](./docs/interview-patterns.md#range-request)
+    * [CDN Distribution](./docs/interview-patterns.md#cdn-distribution)
   * [Storage Architecture](./docs/interview-patterns.md#storage-architecture)
     * [Choosing the Right Storage](./docs/interview-patterns.md#choosing-the-right-storage)
     * [Separating Metadata from Data](./docs/interview-patterns.md#separating-metadata-from-data)

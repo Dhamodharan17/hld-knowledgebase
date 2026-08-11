@@ -154,13 +154,6 @@ The weakest useful guarantee: if you stop writing, eventually all replicas will 
 
 Use cases: DNS, caches, view counters, likes.
 
-**Conflict resolution for eventual consistency:**
-
-| **Approach** | **Merge Behavior** | **Trade-off** |
-|---|---|---|
-| **Last-write-wins** | Keep the highest-timestamp value | Simple, but can drop concurrent writes |
-| **CRDTs** | Merge concurrent updates by construction | No data loss, but limited to specific data types and carries more metadata |
-
 ### Causal Consistency
 * Causal consistency is useful for user-facing collaboration and social features. 
 * It guarantees that if event A caused event B, everyone who sees B also sees A before B. 
@@ -189,6 +182,20 @@ Real-Time Leaderboard and Gaming Servers: In stateful multiplayer games, sequent
 | **Lower availability** | Cannot serve during partitions |
 | **More complex** | Requires consensus |
 ### Conflict Resolution
+
+Last-write-wins (LWW) is the simplest approach: attach a timestamp to each write and keep the one with the highest timestamp. It is easy to implement but can discard a concurrent update without warning, because the "later" timestamp may reflect clock skew rather than true ordering.
+
+Conflict-free Replicated Data Types (CRDTs) take a different approach. They are data structures designed so that concurrent updates always merge deterministically, without coordination and without losing data. Examples include grow-only counters, sets that track additions and removals, and sequence types used in collaborative text editors.
+
+
+**Conflict resolution for eventual consistency:**
+
+| **Approach** | **Merge Behavior** | **Trade-off** |
+|---|---|---|
+| **Last-write-wins** | Keep the highest-timestamp value | Simple, but can drop concurrent writes |
+| **CRDTs** | Merge concurrent updates by construction | No data loss, but limited to specific data types and carries more metadata |
+
+CRDTs are why tools like collaborative editors and shared shopping carts can stay available during a partition and still converge to a sensible state once replicas reconnect. They pair naturally with the eventual and causal consistency models above.
 
 ## Distributed System Patterns
 Problem which occuring in distributed system.
